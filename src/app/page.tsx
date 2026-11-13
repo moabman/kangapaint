@@ -80,7 +80,7 @@ export default function Home() {
           <div className="relative z-10">
             <h1 className="max-w-2xl text-5xl font-black italic leading-[1.08] tracking-tight drop-shadow-lg sm:text-6xl lg:text-7xl">We Make Your <span className="block">Home Jump!</span></h1>
             <div className="mb-7 mt-5 h-2 w-56 -rotate-2 rounded-full bg-[#ff920b] sm:w-80" />
-            <p className="max-w-xl text-xl font-medium leading-relaxed sm:text-2xl">Professional painting for homes & businesses in Salt Lake, Utah & Davis Counties.</p>
+            <p className="max-w-xl text-xl font-medium leading-relaxed sm:text-2xl">Transform your home with professional interior and exterior painting. Proudly serving Salt Lake, Utah & Davis Counties.</p>
             <div className="mt-8 flex flex-wrap gap-3">
               <button onClick={() => setFormOpen(true)} className="rounded-full bg-[#ff8a00] px-7 py-4 text-lg font-extrabold text-white shadow-xl transition hover:-translate-y-0.5 hover:bg-[#ff9e20]">Get a Free Estimate →</button>
               <a href={`tel:${PHONE}`} className="rounded-full border-2 border-white px-7 py-4 text-lg font-bold transition hover:bg-white hover:text-[#073783]">☎ Call Now</a>
