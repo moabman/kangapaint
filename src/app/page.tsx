@@ -1,3 +1,67 @@
+"use client";
+
+import { useState, type FormEvent } from "react";
+
+const PHONE = "3856954804";
+const services = [
+  { icon: "⌂", title: "Interior Painting", detail: "Walls, ceilings, and complete room refreshes." },
+  { icon: "⌂", title: "Exterior Painting", detail: "Fresh curb appeal for your home's exterior." },
+  { icon: "▰", title: "Walls • Trim • Doors", detail: "Clean lines and carefully finished details." },
+  { icon: "▥", title: "Decks & Fences", detail: "Refresh outdoor wood and painted surfaces." },
+  { icon: "▦", title: "Residential & Commercial", detail: "Painting solutions for homes and businesses." },
+];
+const projects = [
+  { label: "Exterior Painting", image: "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=800&q=85" },
+  { label: "Interior Painting", image: "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=800&q=85" },
+  { label: "Decks & Fences", image: "https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?auto=format&fit=crop&w=800&q=85" },
+  { label: "Commercial Painting", image: "https://images.unsplash.com/photo-1497366754035-f200968a6e72?auto=format&fit=crop&w=800&q=85" },
+];
+
+export default function Home() {
+  const [menuOpen, setMenuOpen] = useState(false);
+  const [formOpen, setFormOpen] = useState(false);
+  const [form, setForm] = useState({ name: "", phone: "", zip: "", service: "Interior Painting", details: "" });
+
+  function submitEstimate(event: FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+    const subject = encodeURIComponent(`Kanga Paint estimate request - ${form.name}`);
+    const body = encodeURIComponent(`Name: ${form.name}\nPhone: ${form.phone}\nZIP: ${form.zip}\nService: ${form.service}\nProject details: ${form.details}`);
+    window.location.href = `mailto:info@kangapaint.com?subject=${subject}&body=${body}`;
+  }
+
+  return (
+    <main className="min-h-screen bg-white text-[#092459]">
+      <header className="sticky top-0 z-40 bg-[#073783] text-white shadow-lg">
+        <div className="mx-auto flex max-w-7xl items-center justify-between gap-5 px-5 py-3 lg:px-8">
+          <a href="#home" className="shrink-0" aria-label="Kanga Paint home">
+            <img src="/kanga-logo.png" alt="Kanga Paint" className="h-16 w-auto max-w-[190px] object-contain sm:h-20" />
+          </a>
+          <nav className="hidden items-center gap-7 font-bold lg:flex" aria-label="Main navigation">
+            {[["Home", "#home"], ["Services", "#services"], ["About", "#about"], ["Projects", "#projects"], ["Contact", "#contact"]].map(([label, href]) => (
+              <a key={href} href={href} className="transition hover:text-[#ff9518]">{label}</a>
+            ))}
+          </nav>
+          <a href={`tel:${PHONE}`} className="hidden rounded-full bg-[#ff8a00] px-6 py-3 text-lg font-extrabold text-white shadow-md transition hover:bg-[#f57900] sm:inline-flex">☎ 385.695.4804</a>
+          <button type="button" aria-label="Toggle menu" aria-expanded={menuOpen} onClick={() => setMenuOpen(!menuOpen)} className="rounded-lg border border-white/40 px-3 py-2 text-2xl lg:hidden">☰</button>
+        </div>
+        {menuOpen && <nav className="flex flex-col gap-1 border-t border-white/20 px-5 py-3 font-semibold lg:hidden">{[["Home", "#home"], ["Services", "#services"], ["About", "#about"], ["Projects", "#projects"], ["Contact", "#contact"]].map(([label, href]) => <a key={href} href={href} onClick={() => setMenuOpen(false)} className="rounded px-3 py-2 hover:bg-white/10">{label}</a>)}<a className="px-3 py-2" href={`tel:${PHONE}`}>☎ 385.695.4804</a></nav>}
+      </header>
+
+      <section id="home" className="relative isolate overflow-hidden bg-gradient-to-br from-[#0955bc] via-[#073783] to-[#031d4d] text-white">
+        <div className="absolute -left-32 -top-40 h-[500px] w-[500px] rounded-full border-[85px] border-[#1674dc]/30" />
+        <div className="absolute -bottom-36 right-[-12%] h-80 w-[80%] rotate-[-12deg] rounded-[50%] bg-[#ff8a00]" />
+        <div className="mx-auto grid min-h-[550px] max-w-7xl items-center gap-8 px-5 py-16 lg:grid-cols-[1.05fr_.95fr] lg:px-8 lg:py-24">
+          <div className="relative z-10">
+            <h1 className="max-w-2xl text-5xl font-black italic leading-[1.08] tracking-tight drop-shadow-lg sm:text-6xl lg:text-7xl">We Make Your <span className="block">Home Jump!</span></h1>
+            <div className="mb-7 mt-5 h-2 w-56 -rotate-2 rounded-full bg-[#ff920b] sm:w-80" />
+            <p className="max-w-xl text-xl font-medium leading-relaxed sm:text-2xl">Professional painting for homes & businesses in Salt Lake, Utah & Davis Counties.</p>
+            <div className="mt-8 flex flex-wrap gap-3">
+              <button onClick={() => setFormOpen(true)} className="rounded-full bg-[#ff8a00] px-7 py-4 text-lg font-extrabold text-white shadow-xl transition hover:-translate-y-0.5 hover:bg-[#ff9e20]">Get a Free Estimate →</button>
+              <a href={`tel:${PHONE}`} className="rounded-full border-2 border-white px-7 py-4 text-lg font-bold transition hover:bg-white hover:text-[#073783]">☎ Call Now</a>
+            </div>
+            <div className="mt-10 flex flex-wrap gap-6 text-sm font-bold sm:gap-9"><span>☆ Quality-Focused</span><span>✓ Local Utah Company</span><span>♡ Free Estimates</span></div>
+          </div>
+          <div className="relative z-10 mx-auto w-full max-w-[620px]">
             <div className="absolute -inset-3 rotate-3 rounded-[3rem] bg-[#ff8a00]" />
             <img src="https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=1300&q=90" alt="Beautifully finished modern home" className="relative h-[340px] w-full rounded-[2.5rem] border-8 border-white object-cover shadow-2xl sm:h-[450px]" />
             <div className="absolute -bottom-5 -left-4 rounded-2xl border-4 border-white bg-[#ff8a00] px-5 py-3 text-lg font-black shadow-xl sm:text-xl">🦘 Kanga Paint</div>
