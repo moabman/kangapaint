@@ -9,7 +9,6 @@ const services = [
   { icon: "/trim-doors.png", title: "Walls • Trim • Doors", detail: "Clean lines and carefully finished details." },
   { icon: "/decks-fences.png", title: "Decks & Fences", detail: "Refresh outdoor wood and painted surfaces." },
   { icon: "/commercial.png", title: "Residential & Commercial", detail: "Painting solutions for homes and businesses." },
-},
 ];
 const projects = [
   { label: "Exterior Painting", image: "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=800&q=85" },
