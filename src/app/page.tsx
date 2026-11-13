@@ -21,12 +21,38 @@ export default function Home() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [formOpen, setFormOpen] = useState(false);
   const [form, setForm] = useState({ name: "", phone: "", zip: "", service: "Interior Painting", details: "" });
+  const [sending, setSending] = useState(false);
+  const [formMessage, setFormMessage] = useState("");
 
-  function submitEstimate(event: FormEvent<HTMLFormElement>) {
+  async function submitEstimate(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
-    const subject = encodeURIComponent(`Kanga Paint estimate request - ${form.name}`);
-    const body = encodeURIComponent(`Name: ${form.name}\nPhone: ${form.phone}\nZIP: ${form.zip}\nService: ${form.service}\nProject details: ${form.details}`);
-    window.location.href = `mailto:info@kangapaint.com?subject=${subject}&body=${body}`;
+    if (sending) return;
+    setSending(true);
+    setFormMessage("");
+
+    try {
+      const response = await fetch("/api/estimate", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          name: form.name,
+          phone: form.phone,
+          zip: form.zip,
+          projectType: form.service,
+          message: form.details,
+        }),
+      });
+      if (!response.ok) {
+        const result = await response.json().catch(() => null);
+        throw new Error(result?.error || "Unable to send your request. Please try again.");
+      }
+      setForm({ name: "", phone: "", zip: "", service: "Interior Painting", details: "" });
+      setFormMessage("Your estimate request has been sent! We'll be in touch soon.");
+    } catch (error) {
+      setFormMessage(error instanceof Error ? error.message : "Unable to send your request. Please try again.");
+    } finally {
+      setSending(false);
+    }
   }
 
   return (
@@ -95,7 +121,7 @@ export default function Home() {
 
       <footer className="border-t-8 border-[#ff8a00] bg-[#031d4d] px-5 py-12 text-white lg:px-8"><div className="mx-auto grid max-w-7xl gap-9 md:grid-cols-3 md:items-center"><div><img src="/kanga-logo.png" alt="Kanga Paint" className="h-24 w-auto" /></div><div><h3 className="mb-2 text-lg font-black">📍 Service Areas</h3><p>Salt Lake County | Utah County | Davis County</p></div><div className="space-y-2"><a className="block font-bold hover:text-[#ff9e20]" href={`tel:${PHONE}`}>☎ 385.695.4804</a><a className="block hover:text-[#ff9e20]" href="mailto:info@kangapaint.com">✉ info@kangapaint.com</a><p>🌐 kangapaint.com</p></div></div><p className="mx-auto mt-10 max-w-7xl border-t border-white/20 pt-6 text-center text-xs text-white/60">© 2026 Kanga Paint. All rights reserved.</p></footer>
 
-      {formOpen && <div className="fixed inset-0 z-50 flex items-center justify-center overflow-y-auto bg-[#031d4d]/80 p-4" role="presentation" onMouseDown={e => { if(e.target === e.currentTarget) setFormOpen(false); }}><div role="dialog" aria-modal="true" aria-labelledby="estimate-title" className="relative my-auto w-full max-w-lg rounded-3xl bg-white p-6 text-[#092459] shadow-2xl sm:p-9"><button onClick={() => setFormOpen(false)} aria-label="Close estimate form" className="absolute right-5 top-4 text-3xl text-slate-500">×</button><h2 id="estimate-title" className="pr-8 text-3xl font-black">Get a Free Estimate</h2><p className="mb-6 mt-2 text-sm text-slate-600">Fill out the details below. Submitting opens your email app with the request ready to send.</p><form onSubmit={submitEstimate} className="space-y-4">{[["Your name", "name", "text"], ["Phone number", "phone", "tel"], ["Project ZIP code", "zip", "text"]].map(([label,key,type]) => <label key={key} className="block text-sm font-bold">{label}<input required type={type} value={form[key as "name" | "phone" | "zip"]} onChange={e => setForm(prev => ({...prev, [key]: e.target.value}))} className="mt-1 block w-full rounded-xl border border-slate-300 px-4 py-3 outline-none focus:border-[#0649ae]" /></label>)}<label className="block text-sm font-bold">Project type<select value={form.service} onChange={e => setForm(prev => ({...prev, service:e.target.value}))} className="mt-1 block w-full rounded-xl border border-slate-300 px-4 py-3">{services.map(service => <option key={service.title}>{service.title}</option>)}</select></label><label className="block text-sm font-bold">Tell us about your project<textarea rows={3} value={form.details} onChange={e => setForm(prev => ({...prev, details:e.target.value}))} className="mt-1 block w-full rounded-xl border border-slate-300 px-4 py-3" /></label><button type="submit" className="w-full rounded-full bg-[#ff8a00] px-6 py-4 text-lg font-black text-white hover:bg-[#ed7900]">Prepare Email Request →</button></form></div></div>}
+      {formOpen && <div className="fixed inset-0 z-50 flex items-center justify-center overflow-y-auto bg-[#031d4d]/80 p-4" role="presentation" onMouseDown={e => { if(e.target === e.currentTarget) setFormOpen(false); }}><div role="dialog" aria-modal="true" aria-labelledby="estimate-title" className="relative my-auto w-full max-w-lg rounded-3xl bg-white p-6 text-[#092459] shadow-2xl sm:p-9"><button onClick={() => setFormOpen(false)} aria-label="Close estimate form" className="absolute right-5 top-4 text-3xl text-slate-500">×</button><h2 id="estimate-title" className="pr-8 text-3xl font-black">Get a Free Estimate</h2><p className="mb-6 mt-2 text-sm text-slate-600">Fill out the details below and we’ll contact you about your free estimate.</p><form onSubmit={submitEstimate} className="space-y-4">{[["Your name", "name", "text"], ["Phone number", "phone", "tel"], ["Project ZIP code", "zip", "text"]].map(([label,key,type]) => <label key={key} className="block text-sm font-bold">{label}<input required type={type} value={form[key as "name" | "phone" | "zip"]} onChange={e => setForm(prev => ({...prev, [key]: e.target.value}))} className="mt-1 block w-full rounded-xl border border-slate-300 px-4 py-3 outline-none focus:border-[#0649ae]" /></label>)}<label className="block text-sm font-bold">Project type<select value={form.service} onChange={e => setForm(prev => ({...prev, service:e.target.value}))} className="mt-1 block w-full rounded-xl border border-slate-300 px-4 py-3">{services.map(service => <option key={service.title}>{service.title}</option>)}</select></label><label className="block text-sm font-bold">Tell us about your project<textarea rows={3} value={form.details} onChange={e => setForm(prev => ({...prev, details:e.target.value}))} className="mt-1 block w-full rounded-xl border border-slate-300 px-4 py-3" /></label><button type="submit" disabled={sending} className="w-full rounded-full bg-[#ff8a00] px-6 py-4 text-lg font-black text-white hover:bg-[#ed7900]">{sending ? "Sending..." : "Send Estimate Request →"}</button>{formMessage && <p role="status" aria-live="polite" className="text-center text-sm font-semibold">{formMessage}</p>}</form></div></div>}
     </main>
   );
 }
