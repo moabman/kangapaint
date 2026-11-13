@@ -90,7 +90,7 @@ export default function Home() {
           <div className="relative z-10 mx-auto w-full max-w-[620px]">
             <div className="absolute -inset-3 rotate-3 rounded-[3rem] bg-[#ff8a00]" />
             <img src="https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=1300&q=90" alt="Beautifully finished modern home" className="relative h-[340px] w-full rounded-[2.5rem] border-8 border-white object-cover shadow-2xl sm:h-[450px]" />
-            <div className="absolute -bottom-5 -left-4 rounded-2xl border-4 border-white bg-[#ff8a00] px-5 py-3 text-lg font-black shadow-xl sm:text-xl">🦘 Kanga Paint</div>
+            <div className="absolute -bottom-5 -left-4 rounded-2xl border-4 border-white bg-[#ff8a00] px-5 py-3 text-lg font-black shadow-xl sm:text-xl">✨ Beautiful Homes Start Here</div>
           </div>
         </div>
         <svg className="relative -mb-px block w-full" viewBox="0 0 1440 75" preserveAspectRatio="none" aria-hidden="true"><path fill="#ffffff" d="M0 42 C300 5 450 75 720 34 S1150 10 1440 45 L1440 75 L0 75Z" /></svg>
