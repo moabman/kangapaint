@@ -4,10 +4,10 @@ import { useState, type FormEvent } from "react";
 
 const PHONE = "3856954804";
 const services = [
-  { icon: "⌂", title: "Interior Painting", detail: "Walls, ceilings, and complete room refreshes." },
-  { icon: "⌂", title: "Exterior Painting", detail: "Fresh curb appeal for your home's exterior." },
-  { icon: "▰", title: "Walls • Trim • Doors", detail: "Clean lines and carefully finished details." },
-  { icon: "▥", title: "Decks & Fences", detail: "Refresh outdoor wood and painted surfaces." },
+  { icon: "/paint-roller.png", title: "Interior Painting", detail: "Walls, ceilings, and complete room refreshes." },
+  { icon: "/exterior-paint.png", title: "Exterior Painting", detail: "Fresh curb appeal for your home's exterior." },
+  { icon: "/trim-doors.png", title: "Walls • Trim • Doors", detail: "Clean lines and carefully finished details." },
+  { icon: "/decks-fences.png", title: "Decks & Fences", detail: "Refresh outdoor wood and painted surfaces." },
   { icon: "▦", title: "Residential & Commercial", detail: "Painting solutions for homes and businesses." },
 ];
 const projects = [
@@ -74,7 +74,7 @@ export default function Home() {
         <div className="mx-auto max-w-7xl">
           <SectionTitle>Our Painting Services</SectionTitle>
           <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-5">
-            {services.map((service) => <article key={service.title} className="rounded-3xl border-b-[6px] border-[#ff8a00] bg-[#f4f6fa] px-5 py-8 text-center shadow-lg transition hover:-translate-y-1 hover:shadow-xl"><div className="mb-3 text-6xl font-black leading-none text-[#0643a2]">{service.icon}</div><h3 className="text-xl font-black leading-tight">{service.title}</h3><p className="mt-3 text-sm leading-relaxed text-slate-600">{service.detail}</p></article>)}
+            {services.map((service) => <article key={service.title} className="rounded-3xl border-b-[6px] border-[#ff8a00] bg-[#f4f6fa] px-5 py-8 text-center shadow-lg transition hover:-translate-y-1 hover:shadow-xl"><div className="mb-3 flex h-24 items-center justify-center">{service.icon.startsWith("/") ? <img src={service.icon} alt="" className="h-full w-full object-contain" /> : <span className="text-6xl font-black leading-none text-[#0643a2]">{service.icon}</span>}</div><h3 className="text-xl font-black leading-tight">{service.title}</h3><p className="mt-3 text-sm leading-relaxed text-slate-600">{service.detail}</p></article>)}
           </div>
         </div>
       </section>
