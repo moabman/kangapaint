@@ -78,7 +78,7 @@ export default function Home() {
         <div className="absolute -bottom-36 right-[-12%] h-80 w-[80%] rotate-[-12deg] rounded-[50%] bg-[#ff8a00]" />
         <div className="mx-auto grid min-h-[550px] max-w-7xl items-center gap-8 px-5 py-16 lg:grid-cols-[1.05fr_.95fr] lg:px-8 lg:py-24">
           <div className="relative z-10">
-            <h1 className="max-w-2xl text-5xl font-black italic leading-[1.08] tracking-tight drop-shadow-lg sm:text-6xl lg:text-7xl">We Make Your <span className="block">Home Jump!</span></h1>
+            <h1 className="max-w-2xl text-5xl font-black italic leading-[1.08] tracking-tight drop-shadow-lg sm:text-6xl lg:text-7xl">We Make Your <span className="block">Home Value Jump!</span></h1>
             <div className="mb-7 mt-5 h-2 w-56 -rotate-2 rounded-full bg-[#ff920b] sm:w-80" />
             <p className="max-w-xl text-xl font-medium leading-relaxed sm:text-2xl">Transform your home with professional interior and exterior painting. Proudly serving Salt Lake, Utah & Davis Counties.</p>
             <div className="mt-8 flex flex-wrap gap-3">
