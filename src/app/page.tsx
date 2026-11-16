@@ -1,35 +1,3 @@
-"use client";
-
-import { useState, type FormEvent } from "react";
-
-const PHONE = "3856954804";
-const services = [
-  { icon: "/paint-roller.png", title: "Interior Painting", detail: "Walls, ceilings, and complete room refreshes." },
-  { icon: "/exterior-paint.png", title: "Exterior Painting", detail: "Fresh curb appeal for your home's exterior." },
-  { icon: "/trim-doors.png", title: "Walls • Trim • Doors", detail: "Clean lines and carefully finished details." },
-  { icon: "/decks-fences.png", title: "Decks & Fences", detail: "Refresh outdoor wood and painted surfaces." },
-  { icon: "/commercial.png", title: "Residential & Commercial", detail: "Painting solutions for homes and businesses." },
-];
-const projects = [
-  { label: "Exterior Painting", image: "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=800&q=85" },
-  { label: "Interior Painting", image: "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=800&q=85" },
-  { label: "Decks & Fences", image: "https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?auto=format&fit=crop&w=800&q=85" },
-  { label: "Commercial Painting", image: "https://images.unsplash.com/photo-1497366754035-f200968a6e72?auto=format&fit=crop&w=800&q=85" },
-];
-
-export default function Home() {
-  const [menuOpen, setMenuOpen] = useState(false);
-  const [formOpen, setFormOpen] = useState(false);
-  const [form, setForm] = useState({ name: "", phone: "", zip: "", service: "Interior Painting", details: "" });
-  const [sending, setSending] = useState(false);
-  const [formMessage, setFormMessage] = useState("");
-
-  async function submitEstimate(event: FormEvent<HTMLFormElement>) {
-    event.preventDefault();
-    if (sending) return;
-    setSending(true);
-    setFormMessage("");
-
     try {
       const response = await fetch("/api/estimate", {
         method: "POST",
@@ -73,27 +41,30 @@ export default function Home() {
         {menuOpen && <nav className="flex flex-col gap-1 border-t border-white/20 px-5 py-3 font-semibold lg:hidden">{[["Home", "#home"], ["Services", "#services"], ["About", "#about"], ["Projects", "#projects"], ["Contact", "#contact"]].map(([label, href]) => <a key={href} href={href} onClick={() => setMenuOpen(false)} className="rounded px-3 py-2 hover:bg-white/10">{label}</a>)}<a className="px-3 py-2" href={`tel:${PHONE}`}>☎ 385.695.4804</a></nav>}
       </header>
 
-      <section id="home" className="relative isolate overflow-hidden bg-gradient-to-br from-[#0955bc] via-[#073783] to-[#031d4d] text-white">
-        <div className="absolute -left-32 -top-40 h-[500px] w-[500px] rounded-full border-[85px] border-[#1674dc]/30" />
-        <div className="absolute -bottom-36 right-[-12%] h-80 w-[80%] rotate-[-12deg] rounded-[50%] bg-[#ff8a00]" />
-        <div className="mx-auto grid min-h-[550px] max-w-7xl items-center gap-8 px-5 py-16 lg:grid-cols-[1.05fr_.95fr] lg:px-8 lg:py-24">
+      <section id="home" className="relative isolate overflow-hidden bg-[#f6f7f9] text-[#092459]">
+        <div className="absolute inset-x-0 top-0 h-3 bg-[#ff8a00]" />
+        <div className="mx-auto grid max-w-7xl items-center gap-10 px-5 py-16 lg:grid-cols-[1.05fr_.95fr] lg:px-8 lg:py-24">
           <div className="relative z-10">
-            <h1 className="max-w-2xl text-5xl font-black italic leading-[1.08] tracking-tight drop-shadow-lg sm:text-6xl lg:text-7xl">We Make Your <span className="block">Home Value Jump!</span></h1>
-            <div className="mb-7 mt-5 h-2 w-56 -rotate-2 rounded-full bg-[#ff920b] sm:w-80" />
-            <p className="max-w-xl text-xl font-medium leading-relaxed sm:text-2xl">Transform your home with professional interior and exterior painting. Proudly serving Salt Lake, Utah & Davis Counties.</p>
-            <div className="mt-8 flex flex-wrap gap-3">
-              <button onClick={() => setFormOpen(true)} className="rounded-full bg-[#ff8a00] px-7 py-4 text-lg font-extrabold text-white shadow-xl transition hover:-translate-y-0.5 hover:bg-[#ff9e20]">Get a Free Estimate →</button>
-              <a href={`tel:${PHONE}`} className="rounded-full border-2 border-white px-7 py-4 text-lg font-bold transition hover:bg-white hover:text-[#073783]">☎ Call Now</a>
-            </div>
-            <div className="mt-10 flex flex-wrap gap-6 text-sm font-bold sm:gap-9"><span>☆ Quality-Focused</span><span>✓ Local Utah Company</span><span>♡ Free Estimates</span></div>
+            <p className="mb-4 text-sm font-black uppercase tracking-[.2em] text-[#ec7600]">Residential & Commercial Painting • Utah</p>
+            <h1 className="text-5xl font-black italic leading-[1.08] tracking-tight sm:text-6xl xl:text-7xl">Exceptional Painting.<span className="mt-3 block w-fit -rotate-1 bg-[#ff8a00] px-3 py-2 text-white shadow-lg">Every Detail Matters.</span></h1>
+            <p className="mt-8 max-w-xl text-xl font-semibold leading-relaxed">Professional painting with a focus on craftsmanship, precision, and a high-quality finish that lasts.</p>
+            <p className="mt-4 max-w-xl text-base leading-relaxed text-slate-600">From beautifully finished baseboards and door casings to seamless transitions and flawless walls, we believe exceptional results are built on the details.</p>
+            <ul className="mt-7 space-y-3 text-lg font-extrabold">
+              {["Meticulous Surface Preparation", "Seamless Caulk Joints & Transitions", "Crisp, Clean Trim Lines", "Smooth, Durable Finishes"].map(item => <li key={item} className="flex items-center gap-3"><span className="grid h-8 w-8 shrink-0 place-items-center rounded-full bg-[#ff8a00] text-white">✓</span>{item}</li>)}
+            </ul>
+            <div className="mt-9 flex flex-wrap gap-3"><button onClick={() => setFormOpen(true)} className="rounded-full bg-[#ff8a00] px-8 py-4 text-lg font-black text-white shadow-lg transition hover:bg-[#ed7900]">Get a Free Estimate →</button><a href={`tel:${PHONE}`} className="rounded-full border-2 border-[#073783] px-8 py-4 text-lg font-black text-[#073783] transition hover:bg-[#073783] hover:text-white">Call Us Today</a></div>
           </div>
-          <div className="relative z-10 mx-auto w-full max-w-[620px]">
-            <div className="absolute -inset-3 rotate-3 rounded-[3rem] bg-[#ff8a00]" />
-            <img src="https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=1300&q=90" alt="Beautifully finished modern home" className="relative h-[340px] w-full rounded-[2.5rem] border-8 border-white object-cover shadow-2xl sm:h-[450px]" />
-            <div className="absolute -bottom-5 -left-4 rounded-2xl border-4 border-white bg-[#ff8a00] px-5 py-3 text-lg font-black shadow-xl sm:text-xl">✨ Beautiful Homes Start Here</div>
+          <div className="grid min-w-0 grid-cols-[1.35fr_.8fr] gap-3">
+            <div className="relative min-h-[480px] overflow-hidden rounded-3xl shadow-2xl sm:min-h-[600px]">
+              <img src="/detail-door.jpg" alt="Modern white door with clean flat casing and precise painted trim" className="h-full w-full object-cover" onError={e => { e.currentTarget.src = 'https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?auto=format&fit=crop&w=1100&q=85'; }} />
+              <span className="absolute bottom-4 left-4 rounded-xl bg-[#073783]/90 px-4 py-2 text-sm font-bold text-white">Beautiful results start with the details</span>
+            </div>
+            <div className="grid grid-rows-3 gap-3">
+              {[{src:"/detail-casing.jpg", alt:"Smooth painted door casing and seamless corner joint", label:"Precise casing"},{src:"/detail-base.jpg",alt:"Clean baseboard-to-wall paint transition",label:"Clean baseboards"},{src:"/detail-joint.jpg",alt:"Refined paint and caulk transition at trim joint",label:"Seamless finishes"}].map((detail, index) => <div key={detail.src} className="relative min-h-0 overflow-hidden rounded-2xl border-4 border-white bg-[#e4e7ec] shadow-lg"><img src={detail.src} alt={detail.alt} className="h-full w-full object-cover" onError={e => { e.currentTarget.src = ["https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=600&q=85","https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?auto=format&fit=crop&w=600&q=85","https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?auto=format&fit=crop&w=600&q=85"][index]; }} /><span className="absolute inset-x-0 bottom-0 bg-[#031d4d]/80 px-2 py-2 text-center text-xs font-bold text-white sm:text-sm">{detail.label}</span></div>)}
+            </div>
           </div>
         </div>
-        <svg className="relative -mb-px block w-full" viewBox="0 0 1440 75" preserveAspectRatio="none" aria-hidden="true"><path fill="#ffffff" d="M0 42 C300 5 450 75 720 34 S1150 10 1440 45 L1440 75 L0 75Z" /></svg>
+        <div className="border-t border-slate-200 bg-white px-5 py-6"><div className="mx-auto grid max-w-7xl gap-5 text-center font-black sm:grid-cols-2 lg:grid-cols-4"><span>✦ Quality Craftsmanship</span><span>⌂ Clean, Professional Results</span><span>✓ Long-Lasting Finishes</span><span>★ Local Utah Service</span></div></div>
       </section>
 
       <section id="services" className="scroll-mt-28 px-5 py-16 lg:px-8">
@@ -107,17 +78,18 @@ export default function Home() {
 
       <section id="about" className="scroll-mt-28 overflow-hidden bg-[#ff8a00] text-white">
         <div className="grid lg:grid-cols-2">
-          <div className="min-h-[320px] lg:min-h-[480px]"><img src="https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?auto=format&fit=crop&w=1400&q=85" alt="Freshly painted, inviting living room" className="h-full w-full object-cover" /></div>
+          <div className="min-h-[320px] lg:min-h-[480px]"><img src="https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?auto=format&fit=crop&w=1400&q=85" alt="Beautifully finished interior painting inspiration" className="h-full w-full object-cover" /></div>
           <div className="flex flex-col justify-center bg-gradient-to-br from-[#ff9d15] to-[#ff7800] px-8 py-14 lg:px-16">
-            <h2 className="mb-7 w-fit -rotate-2 rounded-lg bg-[#073783] px-5 py-3 text-3xl font-black italic shadow-lg sm:text-4xl">Why Choose Kanga Paint?</h2>
-            <ul className="space-y-5 text-xl font-bold">{["Attention to detail", "Quality-focused painting", "Clear communication", "Local Utah service", "Free, no-pressure estimates"].map(item => <li key={item} className="flex items-center gap-4"><span className="grid h-8 w-8 shrink-0 place-items-center rounded-full bg-[#0643a2] text-white">✓</span>{item}</li>)}</ul>
+            <h2 className="mb-5 w-fit -rotate-2 rounded-lg bg-[#073783] px-5 py-3 text-3xl font-black italic shadow-lg sm:text-4xl">Why Every Detail Matters</h2>
+            <p className="mb-7 max-w-xl text-lg font-semibold leading-relaxed">A great finish begins long before the final coat. Careful preparation, precise cutting-in, properly finished trim, and consistent coverage all contribute to a result you can feel proud of.</p>
+            <ul className="space-y-4 text-lg font-bold">{["Thoughtful preparation and surface protection", "Clean edges and refined trim details", "Smooth, consistent paint application", "Respectful communication and tidy work areas", "Free, no-pressure estimates"].map(item => <li key={item} className="flex items-center gap-4"><span className="grid h-8 w-8 shrink-0 place-items-center rounded-full bg-[#0643a2] text-white">✓</span>{item}</li>)}</ul>
           </div>
         </div>
       </section>
 
       <section id="projects" className="scroll-mt-28 px-5 py-16 lg:px-8"><div className="mx-auto max-w-7xl"><SectionTitle>Painting Inspiration</SectionTitle><p className="mb-9 text-center text-slate-600">Explore the possibilities for your next painting project.</p><div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">{projects.map(project => <div key={project.label} className="group relative overflow-hidden rounded-3xl shadow-lg"><img src={project.image} alt={project.label + " inspiration"} className="h-64 w-full object-cover transition duration-500 group-hover:scale-105"/><div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-[#031d4d]/90 to-transparent px-5 pb-5 pt-12 font-extrabold text-white">{project.label}</div></div>)}</div><p className="mt-4 text-center text-xs text-slate-500">Illustrative photography — actual Kanga Paint project photos coming soon.</p></div></section>
 
-      <section id="contact" className="scroll-mt-28 bg-gradient-to-r from-[#0649ae] via-[#073783] to-[#031d4d] px-5 py-12 text-white"><div className="mx-auto flex max-w-7xl flex-col items-center justify-between gap-7 text-center md:flex-row md:text-left"><div><h2 className="text-3xl font-black italic sm:text-4xl">Ready to Refresh Your Space?</h2><p className="mt-2 text-lg">Get a free, no-obligation estimate today.</p></div><button onClick={() => setFormOpen(true)} className="shrink-0 rounded-full bg-[#ff8a00] px-8 py-4 text-lg font-black shadow-lg transition hover:bg-[#ff9e20]">Get Your Free Estimate →</button></div></section>
+      <section id="contact" className="scroll-mt-28 bg-gradient-to-r from-[#0649ae] via-[#073783] to-[#031d4d] px-5 py-12 text-white"><div className="mx-auto flex max-w-7xl flex-col items-center justify-between gap-7 text-center md:flex-row md:text-left"><div><h2 className="text-3xl font-black italic sm:text-4xl">Ready for a Beautifully Finished Space?</h2><p className="mt-2 text-lg">Tell us about your project and the finish you envision. Get a free, no-obligation estimate.</p></div><button onClick={() => setFormOpen(true)} className="shrink-0 rounded-full bg-[#ff8a00] px-8 py-4 text-lg font-black shadow-lg transition hover:bg-[#ff9e20]">Get Your Free Estimate →</button></div></section>
 
       <footer className="border-t-8 border-[#ff8a00] bg-[#031d4d] px-5 py-12 text-white lg:px-8"><div className="mx-auto grid max-w-7xl gap-9 md:grid-cols-3 md:items-center"><div><img src="/kanga-logo.png" alt="Kanga Paint" className="h-24 w-auto" /></div><div><h3 className="mb-2 text-lg font-black">📍 Service Areas</h3><p>Salt Lake County | Utah County | Davis County</p></div><div className="space-y-2"><a className="block font-bold hover:text-[#ff9e20]" href={`tel:${PHONE}`}>☎ 385.695.4804</a><a className="block hover:text-[#ff9e20]" href="mailto:info@kangapaint.com">✉ info@kangapaint.com</a><p>🌐 kangapaint.com</p></div></div><p className="mx-auto mt-10 max-w-7xl border-t border-white/20 pt-6 text-center text-xs text-white/60">© 2026 Kanga Paint. All rights reserved.</p></footer>
 
