@@ -1,3 +1,35 @@
+"use client";
+
+import { useState, type FormEvent } from "react";
+
+const PHONE = "3856954804";
+const services = [
+  { icon: "/paint-roller.png", title: "Interior Painting", detail: "Walls, ceilings, and complete room refreshes." },
+  { icon: "/exterior-paint.png", title: "Exterior Painting", detail: "Fresh curb appeal for your home's exterior." },
+  { icon: "/trim-doors.png", title: "Walls • Trim • Doors", detail: "Precision finishing for walls, baseboards, casings, and doors." },
+  { icon: "/decks-fences.png", title: "Decks & Fences", detail: "Refresh outdoor wood and painted surfaces." },
+  { icon: "/commercial.png", title: "Residential & Commercial", detail: "Detail-focused painting for homes and commercial spaces." },
+];
+const projects = [
+  { label: "Exterior Painting", image: "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=800&q=85" },
+  { label: "Interior Painting", image: "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=800&q=85" },
+  { label: "Decks & Fences", image: "https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?auto=format&fit=crop&w=800&q=85" },
+  { label: "Commercial Painting", image: "https://images.unsplash.com/photo-1497366754035-f200968a6e72?auto=format&fit=crop&w=800&q=85" },
+];
+
+export default function Home() {
+  const [menuOpen, setMenuOpen] = useState(false);
+  const [formOpen, setFormOpen] = useState(false);
+  const [form, setForm] = useState({ name: "", phone: "", zip: "", service: "Interior Painting", details: "" });
+  const [sending, setSending] = useState(false);
+  const [formMessage, setFormMessage] = useState("");
+
+  async function submitEstimate(event: FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+    if (sending) return;
+    setSending(true);
+    setFormMessage("");
+
     try {
       const response = await fetch("/api/estimate", {
         method: "POST",
