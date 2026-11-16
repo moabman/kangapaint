@@ -73,30 +73,49 @@ export default function Home() {
         {menuOpen && <nav className="flex flex-col gap-1 border-t border-white/20 px-5 py-3 font-semibold lg:hidden">{[["Home", "#home"], ["Services", "#services"], ["About", "#about"], ["Projects", "#projects"], ["Contact", "#contact"]].map(([label, href]) => <a key={href} href={href} onClick={() => setMenuOpen(false)} className="rounded px-3 py-2 hover:bg-white/10">{label}</a>)}<a className="px-3 py-2" href={`tel:${PHONE}`}>☎ 385.695.4804</a></nav>}
       </header>
 
-      <section id="home" className="relative isolate overflow-hidden bg-[#f6f7f9] text-[#092459]">
-        <div className="absolute inset-x-0 top-0 h-3 bg-[#ff8a00]" />
-        <div className="mx-auto grid max-w-7xl items-center gap-10 px-5 py-16 lg:grid-cols-[1.05fr_.95fr] lg:px-8 lg:py-24">
-          <div className="relative z-10">
-            <p className="mb-4 text-sm font-black uppercase tracking-[.2em] text-[#ec7600]">Residential & Commercial Painting • Utah</p>
-            <h1 className="text-5xl font-black italic leading-[1.08] tracking-tight sm:text-6xl xl:text-7xl">Exceptional Painting.<span className="mt-3 block w-fit -rotate-1 bg-[#ff8a00] px-3 py-2 text-white shadow-lg">Every Detail Matters.</span></h1>
+      <section id="home" className="relative isolate overflow-hidden bg-gradient-to-br from-[#0754b3] via-[#07449b] to-[#032b70] text-white">
+        <div aria-hidden="true" className="pointer-events-none absolute -left-[28%] -top-[30%] h-[110%] w-[110%] rounded-full border-[95px] border-[#2274ce]/20 sm:border-[150px]" />
+        <div aria-hidden="true" className="pointer-events-none absolute -right-[65%] top-[-35%] h-[125%] w-[130%] rounded-full border-[90px] border-[#3b8add]/15 sm:border-[170px]" />
+        <div className="relative z-10 mx-auto grid max-w-7xl items-center gap-12 px-5 pb-16 pt-16 lg:grid-cols-[1.05fr_.95fr] lg:px-8 lg:py-24">
+          <div>
+            <h1 className="max-w-2xl text-[clamp(3.1rem,8.5vw,5.5rem)] font-black italic leading-[1.06] tracking-tight">We Make Your Home Value Jump!</h1>
+            <div aria-hidden="true" className="mt-7 h-3 w-64 max-w-[75%] -rotate-2 rounded-full bg-[#ff8a00] sm:w-80" />
+            <p className="mt-10 max-w-xl text-xl font-semibold leading-relaxed sm:text-2xl">Transform your home with professional interior and exterior painting. Proudly serving Salt Lake, Utah &amp; Davis Counties.</p>
+            <div className="mt-9 flex flex-col items-start gap-4 sm:flex-row sm:flex-wrap">
+              <button type="button" onClick={() => setFormOpen(true)} className="rounded-full bg-[#ff8a00] px-9 py-5 text-xl font-black text-white shadow-lg transition hover:bg-[#ed7900]">Get a Free Estimate →</button>
+              <a href={`tel:${PHONE}`} className="rounded-full border-[3px] border-white px-9 py-4 text-xl font-black text-white transition hover:bg-white hover:text-[#073783]">☎ Call Now</a>
+            </div>
+            <div className="mt-12 flex flex-wrap gap-x-7 gap-y-4 text-sm font-extrabold sm:text-base"><span>☆ Quality-Focused</span><span>✓ Local Utah Company</span><span>♡ Free Estimates</span></div>
+          </div>
+          <div className="relative min-w-0 overflow-hidden rounded-[3rem] border-[10px] border-[#ff8a00] bg-white shadow-2xl lg:rotate-2">
+            <img src="https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=1200&q=85" alt="Beautiful modern home exterior painting inspiration" className="h-[300px] w-full object-cover sm:h-[420px] lg:h-[550px]" />
+          </div>
+        </div>
+      </section>
+
+      <section id="craftsmanship" className="scroll-mt-28 bg-[#f6f7f9] px-5 py-16 text-[#092459] lg:px-8 lg:py-24">
+        <div className="mx-auto grid max-w-7xl items-center gap-12 lg:grid-cols-[1.05fr_.95fr]">
+          <div>
+            <p className="mb-4 text-sm font-black uppercase tracking-[.2em] text-[#ec7600]">Residential &amp; Commercial Painting • Utah</p>
+            <h2 className="text-4xl font-black italic leading-[1.1] tracking-tight sm:text-5xl xl:text-6xl">Exceptional Painting.<span className="mt-4 block w-fit -rotate-1 bg-[#ff8a00] px-3 py-2 text-white shadow-lg">Every Detail Matters.</span></h2>
             <p className="mt-8 max-w-xl text-xl font-semibold leading-relaxed">Professional painting with a focus on craftsmanship, precision, and a high-quality finish that lasts.</p>
-            <p className="mt-4 max-w-xl text-base leading-relaxed text-slate-600">From beautifully finished baseboards and door casings to seamless transitions and flawless walls, we believe exceptional results are built on the details.</p>
-            <ul className="mt-7 space-y-3 text-lg font-extrabold">
+            <p className="mt-4 max-w-xl leading-relaxed text-slate-600">From beautifully finished baseboards and door casings to seamless transitions and flawless walls, we believe exceptional results are built on the details.</p>
+            <ul className="mt-7 space-y-3 text-base font-extrabold sm:text-lg">
               {["Meticulous Surface Preparation", "Seamless Caulk Joints & Transitions", "Crisp, Clean Trim Lines", "Smooth, Durable Finishes"].map(item => <li key={item} className="flex items-center gap-3"><span className="grid h-8 w-8 shrink-0 place-items-center rounded-full bg-[#ff8a00] text-white">✓</span>{item}</li>)}
             </ul>
-            <div className="mt-9 flex flex-wrap gap-3"><button onClick={() => setFormOpen(true)} className="rounded-full bg-[#ff8a00] px-8 py-4 text-lg font-black text-white shadow-lg transition hover:bg-[#ed7900]">Get a Free Estimate →</button><a href={`tel:${PHONE}`} className="rounded-full border-2 border-[#073783] px-8 py-4 text-lg font-black text-[#073783] transition hover:bg-[#073783] hover:text-white">Call Us Today</a></div>
+            <button type="button" onClick={() => setFormOpen(true)} className="mt-9 rounded-full bg-[#ff8a00] px-8 py-4 text-lg font-black text-white shadow-lg transition hover:bg-[#ed7900]">Get a Free Estimate →</button>
           </div>
           <div className="grid min-w-0 grid-cols-[1.35fr_.8fr] gap-3">
-            <div className="relative min-h-[480px] overflow-hidden rounded-3xl shadow-2xl sm:min-h-[600px]">
-              <img src="/detail-door.png" alt="Modern white door with clean flat casing and precise painted trim" className="h-full w-full object-cover" onError={e => { e.currentTarget.src = 'https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?auto=format&fit=crop&w=1100&q=85'; }} />
-              <span className="absolute bottom-4 left-4 rounded-xl bg-[#073783]/90 px-4 py-2 text-sm font-bold text-white">Beautiful results start with the details</span>
+            <div className="relative min-h-[360px] overflow-hidden rounded-3xl shadow-2xl sm:min-h-[550px]">
+              <img src="/detail-door.png" alt="Modern white door with clean flat casing and precise painted trim" className="absolute inset-0 h-full w-full object-cover" onError={e => { e.currentTarget.src = 'https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?auto=format&fit=crop&w=1100&q=85'; }} />
+              <span className="absolute bottom-4 left-4 right-4 rounded-xl bg-[#073783]/90 px-4 py-2 text-sm font-bold text-white">Beautiful results start with the details</span>
             </div>
             <div className="grid grid-rows-3 gap-3">
-              {[{src:"/detail-casing.png", alt:"Smooth painted door casing and seamless corner joint", label:"Precise casing"},{src:"/detail-base.png",alt:"Clean baseboard-to-wall paint transition",label:"Clean baseboards"},{src:"/detail-joint.png",alt:"Refined paint and caulk transition at trim joint",label:"Seamless finishes"}].map((detail, index) => <div key={detail.src} className="relative min-h-0 overflow-hidden rounded-2xl border-4 border-white bg-[#e4e7ec] shadow-lg"><img src={detail.src} alt={detail.alt} className="h-full w-full object-cover" onError={e => { e.currentTarget.src = ["https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=600&q=85","https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?auto=format&fit=crop&w=600&q=85","https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?auto=format&fit=crop&w=600&q=85"][index]; }} /><span className="absolute inset-x-0 bottom-0 bg-[#031d4d]/80 px-2 py-2 text-center text-xs font-bold text-white sm:text-sm">{detail.label}</span></div>)}
+              {[{src:"/detail-casing.png", alt:"Smooth painted door casing and seamless corner joint", label:"Precise casing"},{src:"/detail-base.png",alt:"Clean baseboard-to-wall paint transition",label:"Clean baseboards"},{src:"/detail-joint.png",alt:"Refined paint and caulk transition at trim joint",label:"Seamless finishes"}].map((detail, index) => <div key={detail.src} className="relative min-h-0 overflow-hidden rounded-2xl border-4 border-white bg-[#e4e7ec] shadow-lg"><img src={detail.src} alt={detail.alt} className="absolute inset-0 h-full w-full object-cover" onError={e => { e.currentTarget.src = ["https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=600&q=85","https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?auto=format&fit=crop&w=600&q=85","https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?auto=format&fit=crop&w=600&q=85"][index]; }} /><span className="absolute inset-x-0 bottom-0 bg-[#031d4d]/80 px-2 py-2 text-center text-xs font-bold text-white sm:text-sm">{detail.label}</span></div>)}
             </div>
           </div>
         </div>
-        <div className="border-t border-slate-200 bg-white px-5 py-6"><div className="mx-auto grid max-w-7xl gap-5 text-center font-black sm:grid-cols-2 lg:grid-cols-4"><span>✦ Quality Craftsmanship</span><span>⌂ Clean, Professional Results</span><span>✓ Long-Lasting Finishes</span><span>★ Local Utah Service</span></div></div>
+        <div className="mx-auto mt-14 grid max-w-7xl gap-5 border-t border-slate-200 pt-8 text-center font-black sm:grid-cols-2 lg:grid-cols-4"><span>✦ Quality Craftsmanship</span><span>⌂ Clean, Professional Results</span><span>✓ Long-Lasting Finishes</span><span>★ Local Utah Service</span></div>
       </section>
 
       <section id="services" className="scroll-mt-28 px-5 py-16 lg:px-8">
