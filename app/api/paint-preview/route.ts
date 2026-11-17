@@ -1,7 +1,6 @@
 import OpenAI, { toFile } from "openai";
 import { NextRequest, NextResponse } from "next/server";
 
-export const runtime = "nodejs";
 export const maxDuration = 120;
 const MAX_BYTES = 10 * 1024 * 1024;
 
