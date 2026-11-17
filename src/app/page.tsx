@@ -77,7 +77,7 @@ export default function Home() {
         <div aria-hidden="true" className="pointer-events-none absolute -left-[240px] -top-[145px] h-[650px] w-[650px] rounded-full border-[115px] border-[#3485dc]/20 sm:-left-[260px] sm:-top-[220px] sm:h-[900px] sm:w-[900px] sm:border-[160px]" />
         <div className="relative z-10 mx-auto grid max-w-7xl items-center gap-12 px-5 pb-16 pt-16 lg:grid-cols-[1.05fr_.95fr] lg:px-8 lg:py-24">
           <div>
-            <h1 className="max-w-2xl text-[clamp(3.1rem,8.5vw,5.5rem)] font-black italic leading-[1.06] tracking-tight">We Make Your Home Value Jump!</h1>
+            <h1 className="max-w-2xl text-[clamp(3.1rem,8.5vw,5.5rem)] font-black italic leading-[1.06] tracking-tight">A Leap Above the Rest!</h1>
             <div aria-hidden="true" className="mt-7 h-3 w-64 max-w-[75%] -rotate-2 rounded-full bg-[#ff8a00] sm:w-80" />
             <p className="mt-10 max-w-xl text-xl font-semibold leading-relaxed sm:text-2xl">Transform your home with professional interior and exterior painting. Proudly serving Salt Lake, Utah &amp; Davis Counties.</p>
             <div className="mt-9 flex flex-col items-start gap-4 sm:flex-row sm:flex-wrap">
