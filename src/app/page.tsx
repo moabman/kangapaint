@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, type FormEvent } from "react";
+import PaintVisualizer from "@/components/PaintVisualizer";
 
 const PHONE = "3856954804";
 const services = [
@@ -116,6 +117,9 @@ export default function Home() {
         </div>
         <div className="mx-auto mt-14 grid max-w-7xl gap-5 border-t border-slate-200 pt-8 text-center font-black sm:grid-cols-2 lg:grid-cols-4"><span>✦ Quality Craftsmanship</span><span>⌂ Clean, Professional Results</span><span>✓ Long-Lasting Finishes</span><span>★ Local Utah Service</span></div>
       </section>
+
+      {/* AI Paint Color Visualizer */}
+      <PaintVisualizer />
 
       <section id="services" className="scroll-mt-28 px-5 py-16 lg:px-8">
         <div className="mx-auto max-w-7xl">
